@@ -10,7 +10,7 @@ import { JwtStrategy } from './auth/jwt.strategy';
 @Module({
     imports: [TypeOrmModule.forFeature([User]),
     JwtModule.register({
-        secretOrPrivateKey: 'secret12356789'
+        secret: 'secretKey'
     })
     ],
     providers: [UserService, AuthService,JwtStrategy],

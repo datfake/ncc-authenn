@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn,BeforeInsert } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn,BeforeInsert,OneToMany } from 'typeorm';
 import * as crypto from 'crypto';
+import { notification } from 'src/notification/notification.entity';
 
 @Entity()
 export class User {
@@ -21,4 +22,7 @@ export class User {
   }
   @Column()
   password: string;
+
+  @OneToMany(type => notification, Notification => Notification.user)
+  notifications: notification[];
 }

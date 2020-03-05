@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { User } from 'src/auth/user.entity';
 
 @Entity()
 export class notification {
@@ -14,5 +15,6 @@ export class notification {
     @Column()
     type: string;
 
-    
+    @ManyToOne(type => User, user => user.notifications)
+    user: User;
 }
