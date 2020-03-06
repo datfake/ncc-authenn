@@ -1,7 +1,7 @@
 import { JwtService } from  '@nestjs/jwt';
 import { UserService } from  '../user/user.service';
 import { User } from  '../user.entity';
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 
 @Injectable()
@@ -18,7 +18,7 @@ export class AuthService {
     public async login(user: User): Promise< any | { status: number }>{
         return this.validate(user).then((userData)=>{
           if(!userData || userData.password != user.password){
-            return { status: 404 };
+             throw new UnauthorizedException();
           }
           let payload = `${userData.name}${userData.id}`;
           const accessToken = this.jwtService.sign(payload);
